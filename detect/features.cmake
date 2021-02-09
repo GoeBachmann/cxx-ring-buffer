@@ -1,3 +1,11 @@
+if(IDF_TARGET STREQUAL "esp32")
+
+    set(RING_BUFFER_NOEXCEPT ON)
+    set(RING_BUFFER_CONSTEXPR ON)
+    set(RING_BUFFER_CONSTEXPR_DESTRUCTORS ON)
+
+else()
+
 try_compile(cxx-least-11 ${CMAKE_BINARY_DIR}/detect ${CMAKE_SOURCE_DIR}/detect/cxxstd.cpp
     COMPILE_DEFINITIONS -DCXX_STANDARD=201103
 )
@@ -23,4 +31,6 @@ try_compile(constexpr-destructors-compile ${CMAKE_BINARY_DIR}/detect ${CMAKE_SOU
 if(constexpr-destructors-compile)
     set(RING_BUFFER_CONSTEXPR_DESTRUCTORS ON)
     message(STATUS "Enabling RING_BUFFER_CONSTEXPR_DESTRUCTORS (C++20 and up)")
+endif()
+
 endif()
