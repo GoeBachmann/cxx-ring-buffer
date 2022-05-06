@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-if(NOT IDF_TARGET STREQUAL "esp32")
+if(NOT DEFINED IDF_TARGET)
 project(test-project CXX)
 endif()
 
@@ -22,7 +22,7 @@ if(RING_BUFFER_FEATURE_DETECT)
     include(${CMAKE_CURRENT_LIST_DIR}/detect/features.cmake)
 endif()
 
-if(IDF_TARGET STREQUAL "esp32")
+if(DEFINED IDF_TARGET)
     idf_component_register(INCLUDE_DIRS include)
 
     set(RING_BUFFER_TARGET_NAME ${COMPONENT_TARGET})
@@ -43,7 +43,7 @@ if(RING_BUFFER_CONSTEXPR_DESTRUCTORS)
     target_compile_definitions(${RING_BUFFER_TARGET_NAME} INTERFACE RING_BUFFER_CONSTEXPR_DESTRUCTORS)
 endif()
 
-if(NOT IDF_TARGET STREQUAL "esp32")
+if(NOT DEFINED IDF_TARGET)
     if(RING_BUFFER_BUILD_TESTS)
         add_subdirectory(test)
     endif()
