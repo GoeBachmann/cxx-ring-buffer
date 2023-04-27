@@ -25,6 +25,8 @@ endif()
 if(DEFINED IDF_TARGET)
     idf_component_register(INCLUDE_DIRS include)
 
+    set_property(TARGET ${COMPONENT_LIB} PROPERTY CXX_STANDARD 23)
+
     set(RING_BUFFER_TARGET_NAME ${COMPONENT_TARGET})
 else()
     set(RING_BUFFER_TARGET_NAME ${COMPONENT_TARGET})
