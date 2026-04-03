@@ -79,7 +79,7 @@ public:
     CONSTEXPR const_iterator cend() const COND_NOEXCEPT(noexcept(container.size())) {
         return {container, front_index, container.size()};
     }
-    CONSTEXPR friend void swap(basic_ring_buffer& a, basic_ring_buffer& b) COND_NOEXCEPT(noexcept(detail::adl_swap(a.container, b.container))) {
+    CONSTEXPR friend void swap(basic_ring_buffer& a, basic_ring_buffer& b) COND_NOEXCEPT(noexcept(::detail::adl_swap(a.container, b.container))) {
         using std::swap;
         swap(a.container, b.container);
         swap(a.front_index, b.front_index);
